@@ -12,7 +12,7 @@
 
 # it's better if you remove this star import and import just what you
 # really need from mamba.enterprise
-from mamba.enterprise import Int, Unicode
+from mamba.enterprise import Int, Unicode, transact
 from mamba.application import model
 
 
@@ -27,6 +27,7 @@ class Item(model.Model):
     name = Unicode(allow_none=False)
 
     @classmethod
+    @transact
     def upsert(cls, name):
         item = Item.find(
             Item.name == name,
@@ -39,6 +40,10 @@ class Item(model.Model):
         return True
 
     @classmethod
-    def lookup_list(cls):
-        store = cls.database.store()
-        return store.find(Item)
+    def lookup_list(cls, name=None):
+        items = Item.find(async=False)
+        if name is not None:
+            if not isinstance(name, unicode):
+                name = unicode(name)
+            items = items.find(Item.name == name)
+        return items
