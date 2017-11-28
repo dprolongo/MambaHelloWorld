@@ -1,0 +1,9 @@
+Twisted==15.0.0
+Jinja2==2.7.3
+MySQL-python==1.2.5
+mamba-framework
+mamba-storm
+zope.component==4.2.1
+zope.event==4.0.3
+zope.interface==4.1.2
+transaction

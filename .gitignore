@@ -1,0 +1,8 @@
+*.pyc
+.idea/
+
+
+hello_world/db
+hello_world/logs/*
+hello_world/twistd.pid
+
